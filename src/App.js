@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
 import styled from 'styled-components';
 
@@ -38,16 +38,34 @@ grid-gap: 20px
 */
 
 function App() {
+  const [flowers, setFlowers] = useState([
+    { image: 'blue', name: 'Blue Flower', price: 80, stars: 4 },
+    { image: 'orange', name: 'Blue Flower', price: 80, stars: 4 },
+    { image: 'pink', name: 'Blue Flower', price: 80, stars: 4 },
+  ]);
+
   return (
     <Wrapper>
       <GridHeader>
         <H1>Flower Shop</H1>
       </GridHeader>
       <GridMenu>
-        <h2>Add Flower</h2>
+        <h2>+ Add Flower</h2>
       </GridMenu>
       <CardsWrapper>
-        <Card />
+        {
+          flowers.map((flower) => {
+            const { image, name, price, stars } = flower;
+            return (
+              <Card
+                image={image}
+                name={name}
+                price={price}
+                stars={stars}
+              />
+            );
+          })
+        }
       </CardsWrapper>
     </Wrapper>
   );

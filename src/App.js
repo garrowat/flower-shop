@@ -7,6 +7,7 @@ const Wrapper = styled('div')`
   grid-template-columns: 5vw 1fr 5vw;
   grid-template-rows: repeat(3, auto);
   grid-column-gap: 3vmin;
+  font-family: arial;
 `;
 
 const GridHeader = styled('div')`

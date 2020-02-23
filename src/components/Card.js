@@ -20,15 +20,20 @@ const CardWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 0 auto;
+  flex: 0 0 85vw;
   background: #fff;
   box-shadow: 0 6px 20px rgba(0,0,0,0.09), 0 5px 5px rgba(0,0,0,0.06);
   padding: 11px;
   margin-bottom: 25px;
+  margin-right: 10px;
   transition: all 0.2s ease-out;
 
   &:hover {
     filter: opacity(50%);
+  }
+
+  @media (min-width: 850px) {
+    flex: 0 0 auto;
   }
 `;
 
@@ -149,16 +154,17 @@ export default ({ image, name, price, stars }) => {
                 <InCartText>In Cart</InCartText>
               </InCartTag>
           }
-          <CardImage alt="A Blue Flower" src={`/images/${image}-flower.png`} />
+          <CardImage alt={`${image} flower`} src={`/images/${image}-flower.png`} />
           <CardName>{name}</CardName>
           <CardPrice>${(Math.round(price * 100) / 100).toFixed(2)}</CardPrice>
           <Stars>
             {
               [1, 2, 3, 4, 5].map((star) => {
+                const key = `${name}star${star}`;
                 if (star <= stars) {
-                  return <span>★</span>
+                  return <span key={key}>★</span>
                 } else {
-                  return <InactiveStar>★</InactiveStar>
+                  return <InactiveStar key={key}>★</InactiveStar>
                 }
               })
             }

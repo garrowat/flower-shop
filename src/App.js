@@ -94,24 +94,8 @@ const Plus = styled('span')`
   margin-right: 10px;
 `;
 
-/*
-Notes:
-Card size: 273 x 339px
-Image size: ~250px
-Padding/inner margin: 11px
-Description text: 9px
-Price text: 8px
-Stars: 7px
-Margin above description: 10px
-grid-gap: 20px
-*/
-
 function App() {
-  const [flowers, setFlowers] = useState([
-    { image: 'blue', name: 'Blue Flower', price: 80, stars: 4 },
-    { image: 'orange', name: 'Orange Flower', price: 40.22, stars: 3 },
-    { image: 'pink', name: 'Pink Flower', price: 20, stars: 5 },
-  ]);
+  const [flowers, setFlowers] = useState([]);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -162,21 +146,26 @@ function App() {
             <Plus>+</Plus>Add Flower
           </AddButton>
         </GridMenu>
-        <CardsWrapper>
-          {
-            flowers.map((flower) => {
-              const { image, name, price, stars } = flower;
-              return (
-                <Card
-                  image={image}
-                  name={name}
-                  price={price}
-                  stars={stars}
-                />
-              );
-            })
-          }
-        </CardsWrapper>
+        {
+          flowers.length === 0
+            ? 'Loading Flowers'
+            : <CardsWrapper>
+                {
+                  flowers.map((flower) => {
+                    const { image, name, price, stars } = flower;
+                    return (
+                      <Card
+                        key={name}
+                        image={image}
+                        name={name}
+                        price={price}
+                        stars={stars}
+                      />
+                    );
+                  })
+                }
+              </CardsWrapper>
+        }
       </Wrapper>
     </div>
   );

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+const Container = styled('div')`
+  position: relative;
+`;
+
 const ModalWrapper = styled('div')`
   width: 100%:
   height: 100%;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,6 +16,7 @@ const ModalWrapper = styled('div')`
 `;
 
 const CardWrapper = styled('div')`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,9 +42,11 @@ const CardButton = styled('button')`
   border: none;
   border-radius: 5px;
   padding: 8px 14px 8px 14px ;
+  transition: all 0.1s ease-out;
 
   &:hover {
     background: #5ff3A9;
+    cursor: pointer;
   }
 
   &:hover + ${CardWrapper} {
@@ -76,8 +84,8 @@ const InCartTag = styled('div')`
   position: absolute;
   height: 48px;
   width: 48px;
-  margin-top: -10px;
-
+  top: -10px;
+  left: -5px;
   border-radius: 50%;
   background: #FF6347;
   z-index: 11;
@@ -110,13 +118,8 @@ export default ({ image, name, price, stars }) => {
   };
 
   return (
-    <div>
-      {
-        inCart
-        && <InCartTag>
-            <InCartText>In Cart</InCartText>
-          </InCartTag>
-      }
+    <Container>
+
       <ModalWrapper>
         {
           isHovered
@@ -140,6 +143,12 @@ export default ({ image, name, price, stars }) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          {
+            inCart
+            && <InCartTag>
+                <InCartText>In Cart</InCartText>
+              </InCartTag>
+          }
           <CardImage alt="A Blue Flower" src={`/images/${image}-flower.png`} />
           <CardName>{name}</CardName>
           <CardPrice>${(Math.round(price * 100) / 100).toFixed(2)}</CardPrice>
@@ -156,6 +165,6 @@ export default ({ image, name, price, stars }) => {
           </Stars>
         </CardWrapper>
       </ModalWrapper>
-    </div>
+    </Container>
   );
 };

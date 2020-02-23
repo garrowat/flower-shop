@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import AddFlowerForm from './components/AddFlowerForm';
 import Card from './components/Card';
 import styled from 'styled-components';
 
+const FormModal = styled('div')`
+  position: fixed;
+  margin: -10px;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  opacity: 40%;
+  z-index: 15;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Wrapper = styled('div')`
+  position: relative;
   display: grid;
   grid-template-columns: 5vw 1fr 5vw;
   grid-template-rows: repeat(3, auto);
@@ -12,18 +27,47 @@ const Wrapper = styled('div')`
 
 const GridHeader = styled('div')`
   grid-column: 1 / span 3;
+  padding-left: 2vmin;
 `;
 
 const GridMenu = styled('div')`
   grid-column: 1 / span 3;
+  display: flex;
+  padding-left: 2vmin;
+  padding-bottom: 2vmin;
+  align-items: center;
 `;
 
 const CardsWrapper = styled('div')`
   grid-column: 2 / span 1;
+  margin-top: 2vmax;
 `;
 
 const H1 = styled('h1')`
   color: #444444;
+`;
+
+const AddButton = styled('span')`
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #6BBD77;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  transition: all 0.1s ease-out;
+
+  &:hover {
+    background: #5ff3A9;
+    cursor: pointer;
+  }
+`;
+
+const Plus = styled('span')`
+  font-size: 4vmax;
+  margin-right: 10px;
 `;
 
 /*
@@ -41,34 +85,55 @@ grid-gap: 20px
 function App() {
   const [flowers, setFlowers] = useState([
     { image: 'blue', name: 'Blue Flower', price: 80, stars: 4 },
-    { image: 'orange', name: 'Blue Flower', price: 80, stars: 4 },
-    { image: 'pink', name: 'Blue Flower', price: 80, stars: 4 },
+    { image: 'orange', name: 'Orange Flower', price: 40.22, stars: 3 },
+    { image: 'pink', name: 'Pink Flower', price: 20, stars: 5 },
   ]);
 
+  const [showForm, setShowForm] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
+
+  const handleModalClick = () => {
+    setShowForm(false);
+  };
+
   return (
-    <Wrapper>
-      <GridHeader>
-        <H1>Flower Shop</H1>
-      </GridHeader>
-      <GridMenu>
-        <h2>+ Add Flower</h2>
-      </GridMenu>
-      <CardsWrapper>
-        {
-          flowers.map((flower) => {
-            const { image, name, price, stars } = flower;
-            return (
-              <Card
-                image={image}
-                name={name}
-                price={price}
-                stars={stars}
-              />
-            );
-          })
-        }
-      </CardsWrapper>
-    </Wrapper>
+    <div>
+      {
+        showForm
+        && <div>
+          <FormModal onClick={handleModalClick} />
+          <AddFlowerForm />
+        </div>
+      }
+      <Wrapper>
+        <GridHeader>
+          <H1>Flower Shop</H1>
+        </GridHeader>
+        <GridMenu>
+          <AddButton onClick={handleButtonClick}>
+            <Plus>+</Plus>Add Flower
+          </AddButton>
+        </GridMenu>
+        <CardsWrapper>
+          {
+            flowers.map((flower) => {
+              const { image, name, price, stars } = flower;
+              return (
+                <Card
+                  image={image}
+                  name={name}
+                  price={price}
+                  stars={stars}
+                />
+              );
+            })
+          }
+        </CardsWrapper>
+      </Wrapper>
+    </div>
   );
 }
 

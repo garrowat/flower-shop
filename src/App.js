@@ -23,6 +23,10 @@ const Wrapper = styled('div')`
   grid-template-rows: repeat(3, auto);
   grid-column-gap: 3vmin;
   font-family: arial;
+
+  @media (min-width: 850px) {
+    grid-template-columns: 5vw repeat(3, 1fr) 5vw;
+  }
 `;
 
 const GridHeader = styled('div')`
@@ -36,11 +40,24 @@ const GridMenu = styled('div')`
   padding-left: 2vmin;
   padding-bottom: 2vmin;
   align-items: center;
+
+  @media (min-width: 850px) {
+    position: relative;
+    grid-column: 5 / span 1;
+    right: 10vmax;
+  }
 `;
 
 const CardsWrapper = styled('div')`
   grid-column: 2 / span 1;
   margin-top: 2vmax;
+
+  @media (min-width: 850px) {
+    grid-column: 2 / span 3;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
 `;
 
 const H1 = styled('h1')`
@@ -50,8 +67,8 @@ const H1 = styled('h1')`
 const AddButton = styled('span')`
   display: flex;
   align-items: center;
-  flex: 0 0 auto;
-  padding: 5px 10px;
+  flex: 0 0 50px;
+  padding: 0px 10px;
   border-radius: 5px;
   background-color: #6BBD77;
   color: white;

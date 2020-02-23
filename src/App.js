@@ -3,6 +3,10 @@ import AddFlowerForm from './components/AddFlowerForm';
 import Card from './components/Card';
 import styled from 'styled-components';
 
+const FormModalWrapper = styled('div')`
+  position: absolute;
+`;
+
 const FormModal = styled('div')`
   position: fixed;
   margin: -10px;
@@ -67,7 +71,7 @@ const H1 = styled('h1')`
 const AddButton = styled('span')`
   display: flex;
   align-items: center;
-  flex: 0 0 50px;
+  flex: 0 0 100px;
   padding: 0px 10px;
   border-radius: 5px;
   background-color: #6BBD77;
@@ -83,7 +87,8 @@ const AddButton = styled('span')`
 `;
 
 const Plus = styled('span')`
-  font-size: 4vmax;
+  font-size: 30px;
+  margin: 5px;
   margin-right: 10px;
 `;
 
@@ -120,10 +125,10 @@ function App() {
     <div>
       {
         showForm
-        && <div>
+        && <FormModalWrapper>
           <FormModal onClick={handleModalClick} />
           <AddFlowerForm />
-        </div>
+        </FormModalWrapper>
       }
       <Wrapper>
         <GridHeader>

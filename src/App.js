@@ -3,6 +3,8 @@ import AddFlowerForm from './components/AddFlowerForm';
 import Card from './components/Card';
 import styled from 'styled-components';
 
+const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://127.0.0.1:3001/inventory';
+
 const FormModalWrapper = styled('div')`
   position: absolute;
 `;
@@ -119,7 +121,28 @@ function App() {
 
   const handleModalClick = () => {
     setShowForm(false);
+    getFlowers(ENDPOINT);
   };
+
+  const getFlowers = async (endpoint) => {
+    const response = await fetch(endpoint)
+      .catch((error) => {
+        const message = `Error fetching flower inventory: ${error}`;
+        console.log(message);
+      });
+
+    const flowerData = await response.json()
+      .catch((error) => {
+        const message = `Error getting flower JSON from response: ${error}`;
+        console.log(message);
+      });
+
+    setFlowers(flowerData);
+  };
+
+  useEffect(() => {
+    getFlowers(ENDPOINT);
+  },[]);
 
   return (
     <div>

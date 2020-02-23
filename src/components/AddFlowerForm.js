@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
+const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://127.0.0.1:3001/inventory';
+
 const FormWrapper = styled('div')`
   position: relative;
   display: flex;
@@ -33,14 +35,34 @@ export default () => {
   const [price, setPrice] = useState('');
   const [stars, setStars] = useState('');
 
+  const createFlower = async (endpoint, formData) => {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .catch((error) => {
+        const message = `Error fetching flower inventory: ${error}`;
+        console.log(message);
+      });
+
+    console.log({ response });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const flowerData = {
+    const colors = ['blue', 'pink', 'orange'];
+    const image = colors[Math.floor(Math.random() * colors.length)];
+    const formData = {
+      image,
       name,
       price,
       stars,
     };
-    console.log({ flowerData });
+    createFlower(ENDPOINT, formData);
   };
 
   return(

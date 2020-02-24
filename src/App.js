@@ -146,7 +146,7 @@ function App() {
           </AddButton>
         </GridMenu>
         {
-          flowers.length === 0
+          flowers && flowers.length === 0
             ? 'Loading Flowers'
             : <CardsWrapper>
                 {

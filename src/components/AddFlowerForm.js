@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://127.0.0.1:3001/inventory';
@@ -89,6 +89,7 @@ export default ({ flowers }) => {
     })
       .catch((error) => {
         const message = `Error fetching flower inventory: ${error}`;
+        console.log(message);
       });
 
     return response;

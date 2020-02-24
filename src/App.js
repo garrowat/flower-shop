@@ -111,11 +111,13 @@ function App() {
     const response = await fetch(endpoint)
       .catch((error) => {
         const message = `Error fetching flower inventory: ${error}`;
+        console.log(message);
       });
 
     const flowerData = await response.json()
       .catch((error) => {
         const message = `Error getting flower JSON from response: ${error}`;
+        console.log(message);
       });
 
     setFlowers(flowerData);

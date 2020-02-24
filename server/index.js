@@ -5,7 +5,7 @@ const app = express().use('*', cors());
 const { sequelize, models } = require('./models');
 const seedData = require('./seed');
 
-const port = process.env.PORT || 3001;
+const port = process.env.SERVER_PORT || 3001;
 
 app.use(express.json());
 

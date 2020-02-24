@@ -118,6 +118,7 @@ export default ({ flowers }) => {
     if (flowers.map(flower => flower.name).includes(name)) {
       e.preventDefault();
       setIsDuplicate(true);
+      setSuccess(false);
     } else {
       setIsDuplicate(false);
     }
